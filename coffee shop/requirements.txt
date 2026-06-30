@@ -1,0 +1,6 @@
+Flask==3.0.3
+flask-cors==5.0.0
+Flask-Mail==0.10.0
+python-dotenv==1.0.1
+google-auth==2.30.0
+werkzeug==3.0.3
