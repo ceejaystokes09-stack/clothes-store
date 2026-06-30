@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clothes Shop</title>
+    <link rel="icon" type="image/png" href="static/assets/logo.png">
+    <script src="https://kit.fontawesome.com/304058e96a.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/create_style.css') }}" rel="stylesheet">
+</head>
+  <body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="goback">
+                <a href="/"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+            </div>
+            <header class="card-header">
+                <p class="subtitle" >Please provide your email address to send an email to reset your password.</p>
+            </header>
+            <form action="/send-code" method="post" id="loginForm"  class="login-form">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div id="error">
+                    
+                </div>
+                
+
+                <button type="submit" class="submit-btn" >confirm email</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+<script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+</html>

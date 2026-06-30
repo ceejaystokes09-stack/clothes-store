@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="static/assets/logo.png">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://kit.fontawesome.com/304058e96a.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/create_style.css') }}" rel="stylesheet">
+    <title>Clothes Shop</title>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="goback">
+                
+                <a href="/"><i class="fa-solid fa-arrow-left"></i> Go back</a>
+            </div>
+            <header class="card-header">
+                <span class="brand-badge">Clothes Shop Dashboard</span>
+                <h2>Welcome!</h2>
+                <p class="subtitle">Please provide your details to create account.</p>
+            </header>
+            <div id="g_id_onload"
+                data-client_id="685847297841-jcdrgekp22mcoim0rae19mevcjbai7qc.apps.googleusercontent.com"
+                data-context="signin"
+                data-ux_mode="popup"
+                data-callback="handleCredentialResponse"
+                data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="left"
+                style="display: inline-block;">
+            </div>
+            <form action="/create-acc" method="post" id="loginForm"  class="login-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div id="error">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" id="pass" name="pass" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-actions">
+                    <a href="/forgot.html" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn" >Create account</button>
+            </form>
+
+            <footer class="card-footer">
+                <p>Already have an account? <a href="login.html" class="login-link">Log in</a></p>
+            </footer>
+        </div>
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='js/login.js') }}" defer></script>
+</body>
+</html>
