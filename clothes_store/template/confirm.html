@@ -8,6 +8,7 @@
     <script src="https://kit.fontawesome.com/304058e96a.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="{{ url_for('static', filename='css/create_style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/tooltip.css') }}" rel="stylesheet">
 </head>
   <body>
     <div class="login-container">
@@ -18,12 +19,12 @@
             <header class="card-header">
                 <p class="subtitle" >Pls check your email for the 6 digit code.</p>
             </header>
-            <form action="/email-code" method="post" id="loginForm"  class="login-form">
+            <form action="/email-code" method="post" id="confirmForm"  class="login-form">
 
                 <div id="verification-area">
                     <input type="text" id="code-input" name="code" placeholder="Enter 6-digit code" maxlength="6">
                 </div>
-                
+                <div id="error"></div>
 
                 <button type="submit" class="submit-btn" >verify code</button>
             </form>
