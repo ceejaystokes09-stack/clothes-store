@@ -8,6 +8,7 @@
     <script src="https://kit.fontawesome.com/304058e96a.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="{{ url_for('static', filename='css/create_style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/tooltip.css') }}" rel="stylesheet">
 </head>
   <body>
     <div class="login-container">
@@ -18,7 +19,7 @@
             <header class="card-header">
                 <p class="subtitle" >Please provide your email address to send an email to reset your password.</p>
             </header>
-            <form action="/send-code" method="post" id="loginForm"  class="login-form">
+            <form action="/send-code" method="post" id="forgotForm"  class="login-form">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" id="email" name="email" placeholder="you@example.com" required>
