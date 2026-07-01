@@ -24,7 +24,8 @@ class backend:
         for key, value in kwargs.items():
             setattr(self, f"_{key}", value)
 
-    def add_to_db(self):
+    
+    def add_to_db(self, primary_key=None) -> bool:
         """
         Dynamically inserts whatever data fields were passed during initialization into the table.
         """
@@ -41,16 +42,31 @@ class backend:
         values = tuple(self.data_fields.values())
 
         sql_code = f"INSERT INTO {self.table_name} ({columns}) VALUES ({placeholders})"
-        
+        excepted = True
         try:
             cursor.execute(sql_code, values)
             conn.commit()
+            excepted = True 
             #print(f"Data successfully inserted into {self.table_name}.")
+        except sql.IntegrityError as e:
+            # Check if the specific unique constraint failed message is in the error string
+            if f"UNIQUE constraint failed: {self.table_name + "." + primary_key.lower()}" in str(e):
+                excepted= False
+                #print("Error: That email address is already registered.")
+            else:
+                # Handle other integrity errors (like foreign key failures or other unique columns)
+                #print(f"UNIQUE constraint failed: {self.table_name + '.' + primary_key}")
+                print(f"A different integrity error occurred: {e}")
+                excepted = True
+
         except sql.Error as e:
-            print(f"Database error during insert: {e}")
+            # Handle any other general database errors
+            print(f"Database error: {e}")
+            excepted = True
         finally:
             cursor.close()
             conn.close()
+            return excepted 
 
     def clear_db(self):
         """
@@ -108,12 +124,13 @@ class backend:
             cursor.execute(sql_code, (new_value, search_value))
             conn.commit()
             #print(f"Successfully updated {cursor.rowcount} row(s) in {self.table_name}.")
-            return True
+            excpeted = True
         except sql.Error as e:
             #print(f"Error updating data: {e}")
-            return False
+            excpeted = False
         finally:
             conn.close()
+            return excpeted
 
 
     def show_db(self):
@@ -165,6 +182,23 @@ class backend:
 
         # Keep the window open
         root.mainloop()
+
+    def data_exists(self, column, data_to_check):
+ 
+        conn = sql.connect(self.__db_path)
+        cursor = conn.cursor()
+        
+
+        cursor.execute(f"SELECT 1 FROM {self.table_name} WHERE {column} = ? LIMIT 1", (data_to_check,))
+        
+        
+        result = cursor.fetchone()
+        if result:
+            conn.close()
+            return True
+        
+        return False
+
 
     def verify_user(self, email_column="Email", password_column="Password"):
         """
